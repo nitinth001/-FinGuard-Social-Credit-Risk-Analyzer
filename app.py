@@ -3,6 +3,7 @@ import uvicorn
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import numpy as np
+import os
 
 # 1. Initialize FastAPI and Load Model
 app = FastAPI(title="FinGuard: AI Social Credit Analyzer")
@@ -76,4 +77,9 @@ async def analyze_risk(profile: UserProfile):
     }
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    import uvicorn
+    import os
+    # Render provides a PORT environment variable. If it's not there, use 8000.
+    port = int(os.environ.get("PORT", 8000))
+    # CRITICAL: host must be "0.0.0.0" for deployment
+    uvicorn.run(app, host="0.0.0.0", port=port)
