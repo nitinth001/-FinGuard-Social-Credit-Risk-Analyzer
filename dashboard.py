@@ -34,7 +34,8 @@ if st.button("Generate Risk Analysis Report"):
 
     try:
         # Connect to your FastAPI endpoint
-        response = requests.post("http://127.0.0.1:8000/analyze", json=payload)
+        # We add /analyze to the end of your Render URL
+        response = requests.post("https://finguard-social-credit-risk-analyzer.onrender.com/analyze", json=payload)
         res_data = response.json()
 
         # Display results in columns
